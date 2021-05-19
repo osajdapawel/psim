@@ -15,6 +15,7 @@ namespace Application.Mappings
             => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Laptop, LaptopDTO>();
+                cfg.CreateMap<CreateLaptopDTO, Laptop>();
                 
             }).CreateMapper();
     }

@@ -23,5 +23,16 @@ namespace Domain.Entities
         public float RamAmount { get; set; }
 
         public ICollection<LaptopRamRelationship> Laptops { get; set; }
+
+        public Ram():base()
+        {
+        }
+
+        public Ram(string model, string description, float ramAmount):base()
+        {
+            Model = model;
+            Description = description;
+            RamAmount = ramAmount;
+        }
     }
 }

@@ -13,7 +13,9 @@ namespace Application.Interfaces
 
         Task<LaptopDTO> GetLaptopByIdAsync(Guid id);
 
-        Task<LaptopDTO> AddNewLaptopAsync(LaptopDTO)
+        Task<LaptopDTO> AddNewLaptopAsync(CreateLaptopDTO newlaptop);
+
+
 
         // getAllLaptopsAsync zwracające DTOsy
         // getByIdAsync 

@@ -33,5 +33,16 @@ namespace Domain.Entities
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Suborder> Suborders { get; set; }
+
+        public Order(Guid userId, Delivery delivery, ApplicationUser user):base()
+        {
+            UserId = userId;
+            Delivery = delivery;
+            User = user;
+        }
+
+        public Order():base()
+        {
+        }
     }
 }

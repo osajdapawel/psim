@@ -23,5 +23,15 @@ namespace Domain.Entities
         [Required]
         [Display(Name = "Cena")]
         public int Price { get; set; }
+
+        public Delivery(string type, int deliveryTime, int price):base()
+        {
+            Type = type;
+            DeliveryTime = deliveryTime;
+            Price = price;
+        }
+        public Delivery() : base()
+        {
+        }
     }
 }

@@ -46,20 +46,19 @@ namespace Domain.Entities
         public virtual ICollection<Suborder> Suborders { get; set; }
 
         // Marcin a czy tu nie powinno być virtual???????????
-        public ICollection<LaptopRamRelationship> Rams { get; set; }
+        public virtual ICollection<LaptopRamRelationship> Rams { get; set; }
 
-        public Laptop(Guid processorId, Guid graphicsCardId, string model, string description, int quantity, decimal price, Processor processor, GraphicsCard graphicsCard, ICollection<Suborder> suborders, ICollection<LaptopRamRelationship> rams)
+        public Laptop(Guid processorId, Guid graphicsCardId, string model, string description, int quantity, decimal price) : base()
         {
-            Created
-
             ProcessorId = processorId;
             GraphicsCardId = graphicsCardId;
             Model = model;
             Description = description;
             Quantity = quantity;
-            Price = price;
-           
-            Rams = rams;    
+            Price = price;   
+        }
+        public Laptop() : base()
+        {
         }
     }
 }

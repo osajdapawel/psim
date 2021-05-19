@@ -12,5 +12,6 @@ namespace Domain.Entities
         public Laptop Laptop { get; set; }
         public Guid RamId { get; set; }
         public Ram Ram { get; set; }
+
     }
 }

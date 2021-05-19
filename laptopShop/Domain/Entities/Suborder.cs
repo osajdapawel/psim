@@ -24,5 +24,16 @@ namespace Domain.Entities
 
         [ForeignKey("LaptopId")]
         public virtual Laptop Laptop { get; set; }
+
+        public Suborder():base()
+        {
+        }
+        public Suborder(Guid laptopId, int quantity, Order order, Laptop laptop):base()
+        {
+            LaptopId = laptopId;
+            Quantity = quantity;
+            Order = order;
+            Laptop = laptop;
+        }
     }
 }

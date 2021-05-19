@@ -22,6 +22,7 @@ namespace Application.Services
             _mapper = mapper;
         }
 
+
         public async Task<IEnumerable<LaptopDTO>> GetAllLaptopsAsync()
         {
             var laptops = await _laptopRepository.GetAllAsync();
@@ -33,6 +34,18 @@ namespace Application.Services
         {
             var laptop = await _laptopRepository.GetByIdAsync(id);
             return _mapper.Map<LaptopDTO>(laptop);
+        }
+        public Task<LaptopDTO> AddNewLaptopAsync(CreateLaptopDTO newlaptop)
+        {
+            if (string.IsNullOrEmpty(newlaptop.Model) || newlaptop.Quantity < 0 || string.IsNullOrEmpty(newlaptop.Description))
+                throw new Exception("Laptop can not be created.");
+
+            var laptop = _mapper.Map<Laptop>(newlaptop);
+
+            // nie działa
+            // return _mapper.Map<LaptopDTO>(laptop);
+
+
         }
     }
 }

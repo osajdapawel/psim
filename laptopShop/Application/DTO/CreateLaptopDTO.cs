@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    class CreateLaptopDTO
+    public class CreateLaptopDTO
     {
+        public Guid ProcessorId { get; set; }
+
+        public Guid GraphicsCardId { get; set; }
+
+        public string Model { get; set; }
+
+        public string Description { get; set; }
+
+        public int Quantity { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

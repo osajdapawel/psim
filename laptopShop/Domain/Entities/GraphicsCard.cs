@@ -20,5 +20,14 @@ namespace Domain.Entities
         public int VRamAmount { get; set; }
 
         public virtual ICollection<Laptop> Laptops { get; set; }
+
+        public GraphicsCard(string model, int vRamAmount):base()
+        {
+            Model = model;
+            VRamAmount = vRamAmount;
+        }
+        public GraphicsCard() : base()
+        {
+        }
     }
 }

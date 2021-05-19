@@ -17,5 +17,16 @@ namespace Domain.Entities
         public int NumberOfThreds { get; set; }
 
         public virtual ICollection<Laptop> Laptops { get; set; }
+
+        public Processor(string model, int numberOfThreds):base()
+        {
+            Model = model;
+            NumberOfThreds = numberOfThreds;
+        }
+
+        public Processor():base()
+        {
+
+        }
     }
 }
