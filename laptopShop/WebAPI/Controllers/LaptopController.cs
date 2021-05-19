@@ -20,12 +20,23 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var laptops = await _laptopService.GetAllLaptopsAsync();
+            return Ok(laptops);
         }
 
-        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var laptop = await _laptopService.GetLaptopByIdAsync(id);
+            
+            if (laptop == null)
+                return NotFound();
+            
+            return Ok(laptop);
+        }
+
     }
 }
 // dla swaggera koniecznym jest okreslenie typu metody HTTP, bo inaczej rzuca błędem

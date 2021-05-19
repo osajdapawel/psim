@@ -10,11 +10,20 @@ namespace Domain.Entities
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseEntity<T>
+    public abstract class BaseEntity
     {
-        public T Id { get; set; }
+        public Guid Id { get; protected set; }
 
+        public DateTime Created { get; set; }
 
+        public DateTime? LastModified { get; set; }
+
+        protected BaseEntity()
+        {
+            Id = Guid.NewGuid();
+            Created = DateTime.UtcNow;
+            //LastModified = lastModified;
+        }
 
     }
 }

@@ -15,7 +15,7 @@ namespace Infrastructure.Data
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {  
         }
-        public DbSet<Deliveries> Deliveries { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<GraphicsCard> GraphicsCards { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Processor> Processors { get; set; }

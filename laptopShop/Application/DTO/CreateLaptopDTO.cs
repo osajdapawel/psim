@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.DTO
 {
-    public class Deliveries : BaseEntity<int>
+    class CreateLaptopDTO
     {
-
     }
 }

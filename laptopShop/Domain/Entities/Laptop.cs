@@ -8,18 +8,16 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Laptop : BaseEntity<Guid>
+    public class Laptop : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-        /*  [Required]
-          [Display(Name = "Procesor")]
-          public int ProcessorId { get; set; }*/
+        [Required]
+        [Display(Name = "Procesor")]
+        public Guid ProcessorId { get; set; }
 
-        /* [Required]
-         [Display(Name = "Grafika")]
-         public int GraphicsCardId { get; set; }
- */
+        [Required]
+        [Display(Name = "Grafika")]
+        public Guid GraphicsCardId { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string Model { get; set; }
@@ -33,24 +31,45 @@ namespace Domain.Entities
         [Display(Name = "Ilość")]
         public int Quantity { get; set; }
 
-/*        [Required]
+        [Required]
         [Display(Name = "Cena")]
-        public decimal Price { get; set; }*/
+        [Column(TypeName = "money")]
+        public decimal Price { get; set; }
 
-        /*[ForeignKey("ProcessorId")]
+        [ForeignKey("ProcessorId")]
         [Display(Name = "Procesor")]
         public virtual Processor Processor { get; set; }
         [ForeignKey("GraphicsCardId")]
         [Display(Name = "Grafika")]
         public virtual GraphicsCard GraphicsCard { get; set; }
 
-        public virtual ICollection<Suborder> Suborders { get; set; }*/
+        public virtual ICollection<Suborder> Suborders { get; set; }
 
+        // Marcin a czy tu nie powinno być virtual???????????
         public ICollection<LaptopRamRelationship> Rams { get; set; }
 
+        public Laptop(Guid processorId, Guid graphicsCardId, string model, string description, int quantity, decimal price, Processor processor, GraphicsCard graphicsCard, ICollection<Suborder> suborders, ICollection<LaptopRamRelationship> rams)
+        {
+            Created
 
+            ProcessorId = processorId;
+            GraphicsCardId = graphicsCardId;
+            Model = model;
+            Description = description;
+            Quantity = quantity;
+            Price = price;
+           
+            Rams = rams;    
+        }
     }
 }
+
+// Tu będzie problem z ramem
+
+
+
+
+
 
 /* 
  *  Błąd do decimala

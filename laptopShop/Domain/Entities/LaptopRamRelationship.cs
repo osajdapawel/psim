@@ -8,9 +8,9 @@ namespace Domain.Entities
 {
     public class LaptopRamRelationship
     {
-        public int LaptopId { get; set; }
+        public Guid LaptopId { get; set; }
         public Laptop Laptop { get; set; }
-        public int RamId { get; set; }
+        public Guid RamId { get; set; }
         public Ram Ram { get; set; }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTO;
+using Domain.Entities;
 
 namespace Application.Mappings
 {
@@ -12,7 +14,7 @@ namespace Application.Mappings
         public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
             {
-                //cfg.CreateMap<src, dest>();
+                cfg.CreateMap<Laptop, LaptopDTO>();
                 
             }).CreateMapper();
     }

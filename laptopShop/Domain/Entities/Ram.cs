@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Ram : BaseEntity<Guid>
+    public class Ram : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(50)]
         public string Model { get; set; }
