@@ -9,14 +9,27 @@ using Domain.Entities;
 
 namespace Application.Mappings
 {
+    /// <summary>
+    /// Klasa konfiguracji mappera
+    /// </summary>
     public static class AutoMapperConfig
     {
+        /// <summary>
+        /// Konfiguracja mapppera
+        /// </summary>
         public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Laptop, LaptopDTO>();
+                //cfg.CreateMap<Laptop, LaptopDTO>();
+                //cfg.CreateMap<LaptopDTO, Laptop>();
                 cfg.CreateMap<CreateLaptopDTO, Laptop>();
-                
+                cfg.CreateMap<UpdateLaptopDTO, Laptop>();
+                cfg.CreateMap<Laptop, LaptopDTO>()
+                    .ForMember(p => p.ProcessorModel, l => l.MapFrom(src => src.Processor.Model))
+                    .ForMember(p => p.ProcessorNumberOfThreads, l => l.MapFrom(src => src.Processor.NumberOfThreds))
+                    .ForMember(p => p.GraphicsCardModel, l => l.MapFrom(src => src.GraphicsCard.Model))
+                    .ForMember(p => p.GraphicsVRamAmount, l => l.MapFrom(src => src.GraphicsCard.VRamAmount));
+
             }).CreateMapper();
     }
 }

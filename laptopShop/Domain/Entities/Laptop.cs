@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
+    //[Table("Laptops")] - nazwa tabeli
     public class Laptop : BaseEntity
     {
         [Required]
@@ -23,7 +24,7 @@ namespace Domain.Entities
         public string Model { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength(2000)]
         [Display(Name = "Opis")]
         public string Description { get; set; }
 
@@ -57,6 +58,7 @@ namespace Domain.Entities
             Quantity = quantity;
             Price = price;   
         }
+
         public Laptop() : base()
         {
         }

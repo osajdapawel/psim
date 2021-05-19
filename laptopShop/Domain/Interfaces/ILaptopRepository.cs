@@ -32,8 +32,18 @@ namespace Domain.Interfaces
         /// <returns></returns>
         Task addAsyc(Laptop laptop);
 
+        /// <summary>
+        /// Metoda aktualizująca laptop
+        /// </summary>
+        /// <param name="laptop"></param>
+        /// <returns>True - jeśli aktualizacja się powiodła</returns>
         Task<bool> UpdateAsync(Laptop laptop);
 
+        /// <summary>
+        /// Metoda usuwająca laptop o konretnym id
+        /// </summary>
+        /// <param name="id">id laptopa do usunięcia</param>
+        /// <returns>True - jeśli aktualizaja się powiodła</returns>
         Task<bool> DeleteAsync(Guid id);
     }
 }

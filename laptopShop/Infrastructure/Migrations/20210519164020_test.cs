@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -223,14 +223,22 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeliveryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: true),
                     OrderSuborder = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    OrderUser = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_OrderUser",
+                        column: x => x.OrderUser,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Deliveries_OrderSuborder",
                         column: x => x.OrderSuborder,
@@ -247,7 +255,7 @@ namespace Infrastructure.Migrations
                     ProcessorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GraphicsCardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -383,6 +391,11 @@ namespace Infrastructure.Migrations
                 column: "OrderSuborder");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderUser",
+                table: "Orders",
+                column: "OrderUser");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Suborders_LaptopId",
                 table: "Suborders",
                 column: "LaptopId");
@@ -420,9 +433,6 @@ namespace Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Rams");
 
             migrationBuilder.DropTable(
@@ -436,6 +446,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Processors");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Deliveries");

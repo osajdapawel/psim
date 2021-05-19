@@ -16,9 +16,18 @@ namespace Application.Interfaces
         Task<LaptopDTO> AddNewLaptopAsync(CreateLaptopDTO newlaptop);
 
 
+        /// <summary>
+        /// Funkcja do aktualizacjji laptopa
+        /// </summary>
+        /// <param name="updateLaptopDTO">Obiekt UpdateLaptopDTO do aktualizaji</param>
+        /// <returns>True - jeśli aktualizacja się powiodła</returns>
+        Task<bool> UpdateLaptopAsync(UpdateLaptopDTO updateLaptopDTO);
 
-        // getAllLaptopsAsync zwracające DTOsy
-        // getByIdAsync 
-        // 
+        /// <summary>
+        /// Metoda usuwająca laptop o konretnym id
+        /// </summary>
+        /// <param name="id">id laptopa do usunięcia</param>
+        /// <returns>True - jeśli usunięcie się powiodło</returns>
+        Task<bool> DeleteLaptopAsync(Guid id);
     }
 }
