@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -44,6 +45,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "Create a new laptop")]
         public async Task<IActionResult> Post(CreateLaptopDTO createLaptopDTO)
         {
@@ -53,6 +55,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "Update laptop")]
         public async Task<IActionResult> Put(UpdateLaptopDTO updateLaptop)
         {
@@ -63,6 +66,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "Delete an existing laptop")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -75,3 +79,14 @@ namespace WebAPI.Controllers
     }
 }
 // dla swaggera koniecznym jest okreslenie typu metody HTTP, bo inaczej rzuca błędem
+
+// https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses
+/*
+ 
+    In summary, 
+    a 401 Unauthorized response should be used for missing or bad authentication, 
+    and a 403 Forbidden response should be used afterwards, 
+    when the user is authenticated but isn’t authorized 
+    to perform the requested operation on the given resource. 
+
+ */

@@ -65,12 +65,35 @@ namespace Domain.Entities
     }
 }
 
+/*
+ * egzampyl
+procek
+61476c10-7a79-489d-9aaf-0efc48cc3e2a
+2018-06-23 07:30:20
+
+karta
+927cc473-31cb-4b87-a98c-753d54f58b5e
+2018-06-23 07:30:20
+
+guid lapka oczywiście zostanie sam utworzony
+
 // Tu będzie problem z ramem
+// popo:    zamiast ramu fota i każdy zadowolony
 
 
 
+/*
 
+{
+  "processorId": "61476c10-7a79-489d-9aaf-0efc48cc3e2a",
+  "graphicsCardId": "927cc473-31cb-4b87-a98c-753d54f58b5e",
+  "model": "Dell",
+  "description": "Opis della",
+  "quantity": 0,
+  "price": 0
+}
 
+ */
 
 /* 
  *  Błąd do decimala
