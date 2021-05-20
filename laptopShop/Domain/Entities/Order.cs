@@ -20,21 +20,21 @@ namespace Domain.Entities
         [Display(Name = "Dostawa")]
         public Guid? DeliveryId { get; set; }
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         public EnumStatus? Status { get; set; }
 
-        [ForeignKey("OrderSuborder")]
+        [ForeignKey("DeliveryId")]
         [Display(Name = "Dostawa")]
         public virtual Delivery Delivery { get; set; }
 
-        [ForeignKey("OrderUser")]
-        [Display(Name = "Dostawa")]
+        [ForeignKey("UserId")]
+        [Display(Name = "Klient")]
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Suborder> Suborders { get; set; }
 
-        public Order(Guid userId, Delivery delivery, ApplicationUser user):base()
+        public Order(string userId, Delivery delivery, ApplicationUser user):base()
         {
             UserId = userId;
             Delivery = delivery;

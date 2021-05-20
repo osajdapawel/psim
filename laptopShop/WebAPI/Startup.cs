@@ -40,6 +40,8 @@ namespace WebAPI
         {
             services.AddScoped<ILaptopRepository, LaptopRepository>();
             services.AddScoped<ILaptopService, LaptopService>();
+            services.AddScoped<IUserOrderRepository, UserOrderRepository>();
+            services.AddScoped<IUserOrderService, UserOrderService>();
 
             services.AddSingleton(AutoMapperConfig.Initialize());
 

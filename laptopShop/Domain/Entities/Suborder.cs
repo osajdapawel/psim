@@ -10,7 +10,7 @@ namespace Domain.Entities
 {
     public class Suborder : BaseEntity
     {
-        public int? OrderId { get; set; }
+        public Guid? OrderId { get; set; }
 
         [Required]
         public Guid LaptopId { get; set; }
@@ -19,7 +19,7 @@ namespace Domain.Entities
         [Display(Name = "Ilość")]
         public int Quantity { get; set; }
 
-        [ForeignKey("SuborderOrder")]
+        [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
 
         [ForeignKey("LaptopId")]
