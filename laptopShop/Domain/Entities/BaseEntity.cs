@@ -9,7 +9,6 @@ namespace Domain.Entities
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public abstract class BaseEntity
     {
         public Guid Id { get; protected set; }

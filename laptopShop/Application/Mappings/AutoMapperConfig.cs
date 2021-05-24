@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.DTO;
 using Domain.Entities;
+using Domain.Authentication;
 
 namespace Application.Mappings
 {
@@ -30,8 +31,9 @@ namespace Application.Mappings
                     .ForMember(p => p.GraphicsCardModel, l => l.MapFrom(src => src.GraphicsCard.Model))
                     .ForMember(p => p.GraphicsVRamAmount, l => l.MapFrom(src => src.GraphicsCard.VRamAmount));
 
-                //do dokończenia
-                cfg.CreateMap<OrderDTO, Order>();
+                //do dokończenia - cene zmapować
+                cfg.CreateMap<Order, OrderDTO>();
+                cfg.CreateMap<ApplicationUser,  UserDTO>();
 
             }).CreateMapper();
     }

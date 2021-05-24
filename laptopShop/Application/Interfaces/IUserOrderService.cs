@@ -12,5 +12,6 @@ namespace Application.Interfaces
         public Task<IEnumerable<OrderDTO>> GetAllAsync(string userId);
 
         public Task<OrderDTO> GetByIdAsync(string userId,Guid id);
+
     }
 }

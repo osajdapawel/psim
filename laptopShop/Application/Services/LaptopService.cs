@@ -51,7 +51,7 @@ namespace Application.Services
         }
 
         /// <summary>
-        /// Funkcja do aktualizacjji laptopa
+        /// Metoda  asynchroniczna do aktualizacjji laptopa
         /// </summary>
         /// <param name="updateLaptopDTO"></param>
         /// <returns>True - jeśli aktualizacja się powiodła</returns>
@@ -69,7 +69,7 @@ namespace Application.Services
         }
 
         /// <summary>
-        /// Metoda usuwająca laptop o konretnym id
+        /// Metoda asynchroniczna usuwająca laptop o konretnym id
         /// </summary>
         /// <param name="id">id laptopa do usunięcia</param>
         /// <returns>True - jeśli usunięcie się powiodło</returns>
