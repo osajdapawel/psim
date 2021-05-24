@@ -24,7 +24,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetOrders()
         {
             var userName = HttpContext.User.Identity.Name;
-            return Ok();
+            return Ok(await _userOrderService.GetAllAsync(userName));
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrder(Guid id)
+        {
+            var userName = HttpContext.User.Identity.Name;
+            return Ok(await _userOrderService.GetByIdAsync(userName,id));
         }
 
     }

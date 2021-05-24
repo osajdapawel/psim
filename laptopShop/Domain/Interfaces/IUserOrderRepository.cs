@@ -22,6 +22,6 @@ namespace Domain.Interfaces
         /// <param name="userId"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        Task<Order> GeAsync(string userId, Guid orderId);
+        Task<Order> GetByIdAsync(string userId, Guid orderId);
     }
 }

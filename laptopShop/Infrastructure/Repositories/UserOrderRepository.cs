@@ -35,7 +35,7 @@ namespace Infrastructure.Repositories
         /// <param name="userId"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public async Task<Order> GeAsync(string userId, Guid orderId)
+        public async Task<Order> GetByIdAsync(string userId, Guid orderId)
         {
             var orders = await GetAllAsync(userId);
             return orders.FirstOrDefault(o => o.Id == orderId);

@@ -30,6 +30,9 @@ namespace Application.Mappings
                     .ForMember(p => p.GraphicsCardModel, l => l.MapFrom(src => src.GraphicsCard.Model))
                     .ForMember(p => p.GraphicsVRamAmount, l => l.MapFrom(src => src.GraphicsCard.VRamAmount));
 
+                //do dokończenia
+                cfg.CreateMap<OrderDTO, Order>();
+
             }).CreateMapper();
     }
 }
