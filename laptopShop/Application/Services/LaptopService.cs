@@ -43,7 +43,7 @@ namespace Application.Services
                 throw new Exception("Laptop can not be created.");
 
             var laptopik = _mapper.Map<Laptop>(newlaptop);
-            await _laptopRepository.addAsyc(laptopik);
+            await _laptopRepository.AddAsyc(laptopik);
 
             return _mapper.Map<LaptopDTO>(laptopik);
             // nie działało bo nie było async'a i ałejta

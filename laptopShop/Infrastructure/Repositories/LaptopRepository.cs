@@ -43,7 +43,7 @@ namespace Infrastructure.Repositories
         /// </summary>
         /// <param name="laptop"></param>
         /// <returns>Utworzony laptop</returns>
-        public async Task addAsyc(Laptop laptop)
+        public async Task AddAsyc(Laptop laptop)
         {
             await _dbContext.Laptops.AddAsync(laptop);
             await _dbContext.SaveChangesAsync();
@@ -57,9 +57,7 @@ namespace Infrastructure.Repositories
         public async Task<bool> UpdateAsync(Laptop laptop)
         {
             _dbContext.Laptops.Update(laptop);
-            //return await _dbContext.SaveChangesAsync() > 0;
-            await _dbContext.SaveChangesAsync();
-            return true;
+            return await _dbContext.SaveChangesAsync() > 0;
         }
 
         /// <summary>

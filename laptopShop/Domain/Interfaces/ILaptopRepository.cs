@@ -30,7 +30,7 @@ namespace Domain.Interfaces
         /// </summary>
         /// <param name="laptop"></param>
         /// <returns></returns>
-        Task addAsyc(Laptop laptop);
+        Task AddAsyc(Laptop laptop);
 
         /// <summary>
         /// Metoda aktualizująca laptop

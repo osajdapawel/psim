@@ -35,6 +35,8 @@ namespace Application.Mappings
                 cfg.CreateMap<Order, OrderDTO>();
                 cfg.CreateMap<ApplicationUser,  UserDTO>();
 
+                cfg.CreateMap<Suborder, SuborderDTO>();
+
             }).CreateMapper();
     }
 }
