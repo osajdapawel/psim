@@ -43,7 +43,7 @@ namespace Infrastructure.Repositories
             return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Delete(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             var suborder = await _dbContext.Suborders.FindAsync(id);
             if (suborder == null)

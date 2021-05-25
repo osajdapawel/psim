@@ -1,6 +1,7 @@
 ﻿using Application.DTO;
 using Application.Interfaces;
 using AutoMapper;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    class SuborderService : ISuborderService
+    public class SuborderService : ISuborderService
     {
         private readonly ISuborderRepository _suborderRepository; 
+        private readonly IUserRepository _userRepository; 
+
         private readonly IMapper _mapper;
 
         public SuborderService(ISuborderRepository suborderRepository, IMapper mapper)
@@ -31,25 +34,59 @@ namespace Application.Services
         ///<inheritdoc cref="ISuborderService"/>
         public async Task<SuborderDTO> GetSuborderByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var suborder = await _suborderRepository.GetByIdAysnc(id);
+            return  _mapper.Map<SuborderDTO>(suborder);
         }
 
         ///<inheritdoc cref="ISuborderService"/>
         public async Task<SuborderDTO> AddNewSuborderAsync(CreateSuborderDTO newSuborder)
         {
-            throw new NotImplementedException();
+            var suborder = _mapper.Map<Suborder>(newSuborder);
+            await _suborderRepository.AddAsync(suborder);
+
+            return _mapper.Map<SuborderDTO>(suborder);
         }
 
         ///<inheritdoc cref="ISuborderService"/>
         public async Task<bool> UpdateSuborderAsync(UpdateSuborderDTO updateSuborder)
         {
-            throw new NotImplementedException();
+            var suborder = await _suborderRepository.GetByIdAysnc(updateSuborder.Id);
+            if (suborder == null)
+                return false;
+
+            var updatedSuborder = _mapper.Map(updateSuborder, suborder);
+
+            return await _suborderRepository.UpdateAsync(updatedSuborder);
+
         }
 
         ///<inheritdoc cref="ISuborderService"/>
         public async Task<bool> DeleteSuborderAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _suborderRepository.DeleteAsync(id);
+        }
+
+
+        /// <summary>
+        /// Metoda sprawdzająca czy użytkownik ma prawo do danego zasobu
+        /// </summary>
+        /// <param name="id">Id zasobu do sprawdzenia</param>
+        /// <param name="username">Nazwa użytkownika, którego uprawnienia są sprawdzane</param>
+        /// <returns>true jeśli użytkownik ma uprawnienia,  false jeśli ich nie ma</returns>
+        public async Task<bool> CheckPermitionAsync(Guid id, string username)
+        {
+            var user = await _userRepository.GetAplicationUserByNameAsync(username);
+            var userId = user.Id;
+
+            var suborder = await _suborderRepository.GetByIdAysnc(id);
+
+            // tu może być potrzebny include
+            var orderUserId = suborder.Order.UserId;
+
+            if (orderUserId == userId)
+                return true;
+            else
+                return false;
         }
     }
 }

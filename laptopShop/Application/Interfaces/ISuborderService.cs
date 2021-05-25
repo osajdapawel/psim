@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    interface ISuborderService
+    public interface ISuborderService
     {
         /// <summary>
         /// Metoda  asynchroniczna zwracją wszystkie podzamówienia jednego zamówienia

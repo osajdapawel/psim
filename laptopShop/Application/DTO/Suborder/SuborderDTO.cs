@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Application.Mappings;
+using AutoMapper;
+using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    class SuborderDTO
+    public class SuborderDTO : IMap
     {
+        public Guid Id { get; set; }
+
         public Guid? OrderId { get; set; }
 
         public Guid LaptopId { get; set; }
@@ -16,5 +21,9 @@ namespace Application.DTO
 
         public decimal TotalPrice { get; set; }
 
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Suborder, SuborderDTO>();
+        }
     }
 }

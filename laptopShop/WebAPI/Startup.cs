@@ -21,6 +21,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,7 +44,10 @@ namespace WebAPI
             services.AddScoped<IUserOrderRepository, UserOrderRepository>();
             services.AddScoped<IUserOrderService, UserOrderService>();
 
-            services.AddSingleton(AutoMapperConfig.Initialize());
+            // dla mappera z mapowaniem w DTO poprzez dobieranie siê do DTOsów przez refleksje
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            // dla mappera ze standardow¹ konfiguracj¹
+            //services.AddSingleton(AutoMapperConfig.Initialize());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

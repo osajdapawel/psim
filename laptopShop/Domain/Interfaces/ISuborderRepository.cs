@@ -42,7 +42,7 @@ namespace Domain.Interfaces
         /// </summary>
         /// <param name="id">Id podzamówienia do usunięcia</param>
         /// <returns>true - jeśli operacja aktualizacji usuwania się</returns>
-        public Task<bool> Delete(Guid id);
+        public Task<bool> DeleteAsync(Guid id);
 
     }
 }

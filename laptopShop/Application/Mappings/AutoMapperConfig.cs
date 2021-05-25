@@ -23,7 +23,7 @@ namespace Application.Mappings
             {
                 //cfg.CreateMap<Laptop, LaptopDTO>();
                 //cfg.CreateMap<LaptopDTO, Laptop>();
-                cfg.CreateMap<CreateLaptopDTO, Laptop>();
+                cfg.CreateMap<CreateLaptopDTO, Laptop>(); //
                 cfg.CreateMap<UpdateLaptopDTO, Laptop>();
                 cfg.CreateMap<Laptop, LaptopDTO>()
                     .ForMember(p => p.ProcessorModel, l => l.MapFrom(src => src.Processor.Model))

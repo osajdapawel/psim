@@ -26,7 +26,7 @@ namespace Application.Services
 
             return _mapper.Map<IEnumerable<OrderDTO>>(orders);
         }
-
+        // Marcin Najman w kontrolerze nazwa tu ID?
         public async Task<OrderDTO> GetByIdAsync(string userId,Guid id)
         {
             var order = await _userOrderRepository.GetByIdAsync(userId,id);

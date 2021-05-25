@@ -1,4 +1,5 @@
 ﻿using Domain.Authentication;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
@@ -39,22 +40,28 @@ namespace Infrastructure.Repositories
         
             => await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
 
-        /// <summary>
+        public async Task<ApplicationUser> GetAplicationUserByNameAsync(string userName)
+
+            => await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedUserName.ToUpper() == userName.ToUpper());
+
+/*        /// <summary>
         /// Metoda sprawdzająca czy użytkownik ma prawo do danego zasobu
         /// </summary>
         /// <typeparam name="TResource">Typ zasobu do sprawdzenia</typeparam>
         /// <param name="id">Id zasobu do sprawdzenia</param>
         /// <param name="username">Nazwa użytkownika, którego uprawnienia są sprawdzane</param>
         /// <returns>true jeśli użytkownik ma uprawnienia,  false jeśli ich nie ma</returns>
-        public async Task<bool> CheckPermitionAsync<TResource>(Guid id, string username)
+        public async Task<bool> CheckPermitionAsync<TResource>(Guid id, string username) where TResource : Suborder { }
         {
-            var user = await _userManager.Users.SingleAsync(u => u.UserName == username);
+            //var user = await _userManager.TResource.SingleAsync(u => u.UserName == username);
             
-            if (TResource == Order)
+            if 
+
+        (TResourc. == Order)
             
-            var resource = _dbContext.
+           
 
             return false;
-        }
+        }*/
     }
 }

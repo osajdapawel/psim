@@ -1,1 +1,3 @@
 W metodach update poustawiaæ update time
+wprowadziæ porz¹dek z DTO i mapowaniem - mapowanie w DTO 
+daty w DTOsach pododawaæ

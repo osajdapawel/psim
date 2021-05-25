@@ -42,10 +42,10 @@ namespace Application.Services
             if (string.IsNullOrEmpty(newlaptop.Model) || newlaptop.Quantity < 0 || string.IsNullOrEmpty(newlaptop.Description))
                 throw new Exception("Laptop can not be created.");
 
-            var laptopik = _mapper.Map<Laptop>(newlaptop);
-            await _laptopRepository.AddAsyc(laptopik);
+            var laptop = _mapper.Map<Laptop>(newlaptop);
+            await _laptopRepository.AddAsyc(laptop);
 
-            return _mapper.Map<LaptopDTO>(laptopik);
+            return _mapper.Map<LaptopDTO>(laptop);
             // nie działało bo nie było async'a i ałejta
 
         }

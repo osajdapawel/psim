@@ -49,18 +49,5 @@ namespace Infrastructure.Repositories
             var user = await _userRepository.GetAplicationUserByIdAsync(id);
             return _mapper.Map<UserDTO>(user);
         }
-
-        /// <summary>
-        /// Metoda sprawdzająca czy użytkownik ma prawo do danego zasobu
-        /// </summary>
-        /// <typeparam name="TResource">Typ zasobu do sprawdzenia</typeparam>
-        /// <param name="id">Id zasobu do sprawdzenia</param>
-        /// <param name="username">Nazwa użytkownika, którego uprawnienia są sprawdzane</param>
-        /// <returns>true jeśli użytkownik ma uprawnienia,  false jeśli ich nie ma</returns>
-        public async Task<bool> HasPermition<TResource>(Guid id, string username)
-        {
-            var userName 
-            return true;
-        }
     }
 }

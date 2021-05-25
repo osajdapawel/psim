@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Application.Mappings;
+using AutoMapper;
+using Domain.Authentication;
+using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class UserDTO
+    public class UserDTO : IMap
     {
         [DisplayName("Id użytkownika")]
         public virtual Guid Id { get; set; }
@@ -31,5 +35,10 @@ namespace Application.DTO
 
         [DisplayName("Potwiedzenie adresu email")]
         public virtual bool EmailConfirmed { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<ApplicationUser, UserDTO>();
+        }
     }
 }
