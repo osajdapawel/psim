@@ -22,9 +22,9 @@ namespace Domain.Entities
 
         [Required]
         [Display(Name = "Cena")]
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
-        public Delivery(string type, int deliveryTime, int price):base()
+        public Delivery(string type, int deliveryTime, decimal price):base()
         {
             Type = type;
             DeliveryTime = deliveryTime;

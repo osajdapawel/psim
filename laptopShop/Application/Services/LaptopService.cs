@@ -62,10 +62,7 @@ namespace Application.Services
                 return false;
 
             var updatedLaptop = _mapper.Map(updateLaptopDTO, laptop);
-
-            await _laptopRepository.UpdateAsync(updatedLaptop);
-
-            return true;
+            return await _laptopRepository.UpdateAsync(updatedLaptop);
         }
 
         /// <summary>

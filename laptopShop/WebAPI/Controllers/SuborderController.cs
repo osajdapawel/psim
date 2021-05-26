@@ -29,7 +29,9 @@ namespace WebAPI.Controllers
         [SwaggerOperation(Summary = "Retrieves suborder with specific id")]
         public async Task<IActionResult> Get(Guid id)
         {
+            // pobranie nazwy użytkwnika
             var userName = HttpContext.User.Identity.Name;
+
 
             if (!await _suborderService.CheckPermitionAsync(id, userName))
                 return NotFound();

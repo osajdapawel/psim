@@ -17,9 +17,13 @@ namespace Application.DTO
 
         public Guid LaptopId { get; set; }
 
+        public string LaptopName { get; set; }
+
         public int Quantity { get; set; }
 
         public decimal TotalPrice { get; set; }
+
+        public DateTime Created { get; set; }
 
         public void Mapping(Profile profile)
         {

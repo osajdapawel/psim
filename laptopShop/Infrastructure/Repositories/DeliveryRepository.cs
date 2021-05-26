@@ -1,20 +1,20 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Entities;
+using Domain.Interfaces;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Infrastructure.Data;
 
 namespace Infrastructure.Repositories
 {
-    public class LaptopRepository : ILaptopRepository
+    class DeliveryRepository : IDeliveryRepository
     {
         private readonly DataBaseContext _dbContext;
 
-        public LaptopRepository(DataBaseContext dbContext)
+        public DeliveryRepository(DataBaseContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -24,9 +24,9 @@ namespace Infrastructure.Repositories
         /// Metoda pobierająca wszystkie laptopy
         /// </summary>
         /// <returns>wszystkie laptopy</returns>
-        public async Task<IEnumerable<Laptop>> GetAllAsync()
-          
-            => await _dbContext.Laptops.ToListAsync();
+        public async Task<IEnumerable<Delivery>> GetAllAsync()
+
+            => await _dbContext.Deliveries.ToListAsync();
 
 
         /// <summary>
@@ -34,18 +34,19 @@ namespace Infrastructure.Repositories
         /// </summary>
         /// <param name="id">Id laptopa do pobrania</param>
         /// <returns>laptop o konkretnym id</returns>
-        public async Task<Laptop> GetByIdAsync(Guid id)
+        public async Task<Delivery> GetByIdAsync(Guid id)
 
-            => await _dbContext.Laptops.SingleOrDefaultAsync(p => p.Id == id);
+            => await _dbContext.Deliveries.FindAsync(id);
+
 
         /// <summary>
         /// Metoda tworząca nowy laptop
         /// </summary>
         /// <param name="laptop"></param>
         /// <returns>Utworzony laptop</returns>
-        public async Task AddAsyc(Laptop laptop)
+        public async Task AddAsync(Delivery delivery)
         {
-            await _dbContext.Laptops.AddAsync(laptop);
+            await _dbContext.Deliveries.AddAsync(delivery);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -54,9 +55,9 @@ namespace Infrastructure.Repositories
         /// </summary>
         /// <param name="laptop"></param>
         /// <returns>True - jeśli aktualizacja się powiodła</returns>
-        public async Task<bool> UpdateAsync(Laptop laptop)
+        public async Task<bool> UpdateAsync(Delivery delivery)
         {
-            _dbContext.Laptops.Update(laptop);
+            _dbContext.Deliveries.Update(delivery);
             return await _dbContext.SaveChangesAsync() > 0;
         }
 
@@ -67,14 +68,13 @@ namespace Infrastructure.Repositories
         /// <returns>True - jeśli aktualizaja się powiodła</returns>
         public async Task<bool> DeleteAsync(Guid id)
         {
-            var laptop = await _dbContext.Laptops.FindAsync(id);
-            if (laptop == null)
+            var delivery = await _dbContext.Deliveries.FindAsync(id);
+            if (delivery == null)
                 return false;
 
-            _dbContext.Laptops.Remove(laptop);
+            _dbContext.Deliveries.Remove(delivery);
             return await _dbContext.SaveChangesAsync() > 0;
         }
+
     }
 }
-
-

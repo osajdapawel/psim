@@ -16,6 +16,10 @@ namespace Application.DTO
 
         public Guid? DeliveryId { get; set; }
 
+        public string DeliveryName { get; set; }
+
+        public DateTime Created { get; set; }
+
         public string UserId { get; set; }
 
         public EnumStatus? Status { get; set; }
@@ -28,9 +32,11 @@ namespace Application.DTO
 
         public void Mapping(Profile profile)
         {
-            //megazord -- może się wykrzaczyć
-            profile.CreateMap<Order, OrderDTO>()
-                .ForMember(p => p.TotalPrice, o => o.MapFrom(src => src.Suborders.Sum(so => so.Quantity * so.Laptop.Price)));
+            // megazord -- może się wykrzaczyć
+            // możliwe, ze potrzebny będzie include
+            profile.CreateMap<Order, OrderDTO>()                   // całkowity koszt = SUMA( laptop * cena ) + cena dostawy
+                .ForMember(p => p.TotalPrice, o => o.MapFrom(src => src.Suborders.Sum(so => so.Quantity * so.Laptop.Price) + src.Delivery.Price))
+                .ForMember(p => p.DeliveryName, o => o.MapFrom( src => src.Delivery.Type));
         }
     }
 }
