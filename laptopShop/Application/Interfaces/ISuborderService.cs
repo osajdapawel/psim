@@ -45,5 +45,13 @@ namespace Application.Interfaces
         /// <param name="id">id podzamówienia do usunięcia</param>
         /// <returns>true jeśli operacja powiodła się</returns>
         public Task<bool> DeleteSuborderAsync(Guid id);
+
+        /// <summary>
+        /// Metoda sprawdzająca czy użytkownik ma prawo do danego zasobu
+        /// </summary>
+        /// <param name="id">Id zasobu do sprawdzenia</param>
+        /// <param name="username">Nazwa użytkownika, którego uprawnienia są sprawdzane</param>
+        /// <returns>true jeśli użytkownik ma uprawnienia,  false jeśli ich nie ma</returns>
+        public Task<bool> CheckPermitionAsync(Guid id, string username);
     }
 }

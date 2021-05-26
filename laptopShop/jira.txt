@@ -1,3 +1,33 @@
 W metodach update poustawiaæ update time
 wprowadziæ porz¹dek z DTO i mapowaniem - mapowanie w DTO 
 daty w DTOsach pododawaæ
+user nie mo¿e kupiæ wiêcej ni¿ jest na stanie
+odejmowanie od stanu, i jeœli user kupi ju¿ coœ takiego samego to trza zedytowaæ poprzedniego subordera dodaj¹c do niego now¹ iloœæ
+
+//laptop name zmapowaæ w suborder
+
+ proc
+28e80ebf-803e-44c7-8ed2-e5a3835d03c6
+2018-06-23 07:30:20
+ karta
+3928ccf8-68d9-493b-a336-236fa204b8ac
+
+lapek
+b89e0c27-1d44-4d80-8db4-e056260a3f58
+
+
+subordery
+ee5c4f00-4ce9-4a11-b1d1-efcf6eb5c463
+0ccc47c1-792f-4e80-8a70-7ca0ebfa7117
+
+order
+0a47dc16-56cc-4758-87a6-fc1be3bb4a4f
+
+delivery
+16bcecaa-efe7-4809-818f-76d9f33023be
+
+user 
+21780b3b-5a6b-48d1-8196-a0eafb74aadd
+
+
+

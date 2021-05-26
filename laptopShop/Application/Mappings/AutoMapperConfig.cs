@@ -21,8 +21,6 @@ namespace Application.Mappings
         public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
             {
-                //cfg.CreateMap<Laptop, LaptopDTO>();
-                //cfg.CreateMap<LaptopDTO, Laptop>();
                 cfg.CreateMap<CreateLaptopDTO, Laptop>(); //
                 cfg.CreateMap<UpdateLaptopDTO, Laptop>();
                 cfg.CreateMap<Laptop, LaptopDTO>()
@@ -31,11 +29,17 @@ namespace Application.Mappings
                     .ForMember(p => p.GraphicsCardModel, l => l.MapFrom(src => src.GraphicsCard.Model))
                     .ForMember(p => p.GraphicsVRamAmount, l => l.MapFrom(src => src.GraphicsCard.VRamAmount));
 
-                //do dokończenia - cene zmapować
+                cfg.CreateMap<CreateDeliveryDTO, Delivery>();
+                cfg.CreateMap<Delivery, DeliveryDTO>();
+
                 cfg.CreateMap<Order, OrderDTO>();
+
+
                 cfg.CreateMap<ApplicationUser,  UserDTO>();
 
                 cfg.CreateMap<Suborder, SuborderDTO>();
+                cfg.CreateMap<CreateSuborderDTO, Suborder>();
+                cfg.CreateMap<UpdateSuborderDTO, Suborder>();
 
             }).CreateMapper();
     }

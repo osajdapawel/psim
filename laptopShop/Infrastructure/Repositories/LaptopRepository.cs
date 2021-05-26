@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories
         /// <returns>wszystkie laptopy</returns>
         public async Task<IEnumerable<Laptop>> GetAllAsync()
           
-            => await _dbContext.Laptops.ToListAsync();
+            => await _dbContext.Laptops.Include(p => p.Processor).Include(p => p.GraphicsCard).ToListAsync();
 
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories
         /// <returns>laptop o konkretnym id</returns>
         public async Task<Laptop> GetByIdAsync(Guid id)
 
-            => await _dbContext.Laptops.SingleOrDefaultAsync(p => p.Id == id);
+            => await _dbContext.Laptops.Include(p => p.Processor).Include(p => p.GraphicsCard).SingleOrDefaultAsync(p => p.Id == id);
 
         /// <summary>
         /// Metoda tworząca nowy laptop

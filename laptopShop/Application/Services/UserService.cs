@@ -18,6 +18,7 @@ namespace Infrastructure.Repositories
             _userRepository = userRepository;
             _mapper = mapper;
         }
+
         /// <summary>
         /// Funkcja zwracająca wszystkich użytkowników
         /// </summary>

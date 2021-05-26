@@ -18,9 +18,10 @@ namespace Application.Services
 
         private readonly IMapper _mapper;
 
-        public SuborderService(ISuborderRepository suborderRepository, IMapper mapper)
+        public SuborderService(ISuborderRepository suborderRepository, IUserRepository userRepository, IMapper mapper)
         {
             _suborderRepository = suborderRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -78,6 +79,7 @@ namespace Application.Services
             var user = await _userRepository.GetAplicationUserByNameAsync(username);
             var userId = user.Id;
 
+            // tu jest include
             var suborder = await _suborderRepository.GetByIdAysnc(id);
 
             // tu może być potrzebny include

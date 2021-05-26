@@ -13,11 +13,13 @@ namespace Application.Services
     public class UserOrderService : IUserOrderService
     {
         private readonly IUserOrderRepository _userOrderRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public UserOrderService(IUserOrderRepository userOrderRepository, IMapper mapper)
+        public UserOrderService(IUserOrderRepository userOrderRepository, IUserRepository userRepository, IMapper mapper)
         {
             _userOrderRepository = userOrderRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
         public async Task<IEnumerable<OrderDTO>> GetAllAsync(string userId)
@@ -26,11 +28,35 @@ namespace Application.Services
 
             return _mapper.Map<IEnumerable<OrderDTO>>(orders);
         }
-        // Marcin Najman w kontrolerze nazwa tu ID?
-        public async Task<OrderDTO> GetByIdAsync(string userId,Guid id)
+        
+        // do ogaruuuuu
+
+        public Task<OrderDTO> GetByIdAsync(Guid id)
         {
-            var order = await _userOrderRepository.GetByIdAsync(userId,id);
-            return _mapper.Map<OrderDTO>(order);
+            throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Metoda sprawdzająca czy użytkownik ma prawo do danego zasobu
+        /// </summary>
+        /// <param name="id">Id zasobu do sprawdzenia</param>
+        /// <param name="username">Nazwa użytkownika, którego uprawnienia są sprawdzane</param>
+        /// <returns>true jeśli użytkownik ma uprawnienia,  false jeśli ich nie ma</returns>
+        public async Task<bool> CheckPermitionAsync(Guid id, string username)
+        {
+            var user = await _userRepository.GetAplicationUserByNameAsync(username);
+            var userId = user.Id;
+
+            //var suborder = await _userOrderRepository.GetByIdAysnc(id);
+
+            // tu może być potrzebny include
+            //var orderUserId = suborder.Order.UserId;
+
+            //if (orderUserId == userId)
+                //return true;
+           // else
+                return false;
+        }
+
     }
 }

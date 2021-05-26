@@ -29,7 +29,7 @@ namespace Application.Services
 
         }
 
-        public async Task<DeliveryDTO> GetDeliveryById(Guid id)
+        public async Task<DeliveryDTO> GetDeliveryByIdAsync(Guid id)
         {
             var delivery = await _deliveryRepository.GetByIdAsync(id);
             return _mapper.Map<DeliveryDTO>(delivery);
