@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         {
             var laptop = await _laptopService.AddNewLaptopAsync(createLaptopDTO);
 
-            return Created($"api/laptops/{laptop.Id}", laptop);
+            return Created($"api/laptop/{laptop.Id}", laptop);
         }
 
         [HttpPut]

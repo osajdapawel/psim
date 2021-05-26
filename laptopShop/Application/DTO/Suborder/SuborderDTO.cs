@@ -25,6 +25,8 @@ namespace Application.DTO
 
         public DateTime Created { get; set; }
 
+
+        //laptop name zmapować
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Suborder, SuborderDTO>();

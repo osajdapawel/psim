@@ -20,7 +20,7 @@ namespace Application.Interfaces
         /// Metoda asynchroniczna zwracjąca dostawę o konkretynm id
         /// </summary>
         /// <returns>Obietk typu DeliveryDTO</returns>
-        public Task<DeliveryDTO> GetDeliveryById(Guid id);
+        public Task<DeliveryDTO> GetDeliveryByIdAsync(Guid id);
 
         /// <summary>
         /// Metoda asynchroniczna dodająca nową dostawę

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    class DeliveryRepository : IDeliveryRepository
+    public class DeliveryRepository : IDeliveryRepository
     {
         private readonly DataBaseContext _dbContext;
 

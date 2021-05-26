@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    class SuborderRepository : ISuborderRepository
+    public class SuborderRepository : ISuborderRepository
     {
         private readonly DataBaseContext _dbContext;
 
@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories
 
         public async Task<Suborder> GetByIdAysnc(Guid id)
         {
-            var suborder = await _dbContext.Suborders.FindAsync(id);
+            var suborder = await _dbContext.Suborders.Include(p => p.Order).FirstOrDefaultAsync(p => p.Id == id);
             return suborder;
         }
 

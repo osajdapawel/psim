@@ -11,7 +11,9 @@ namespace Application.Interfaces
     {
         public Task<IEnumerable<OrderDTO>> GetAllAsync(string userId);
 
-        public Task<OrderDTO> GetByIdAsync(string userId,Guid id);
+        public Task<OrderDTO> GetByIdAsync(Guid id);
+
+        public Task<bool> CheckPermitionAsync(Guid id, string username);
 
     }
 }

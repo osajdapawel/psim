@@ -1,4 +1,5 @@
 ﻿using Application.DTO;
+using Application.Interfaces;
 using Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,9 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SuborderController : ControllerBase
     {
-        private readonly SuborderService _suborderService;
+        private readonly ISuborderService _suborderService;
 
-        public SuborderController(SuborderService suborderService)
+        public SuborderController(ISuborderService suborderService)
         {
             _suborderService = suborderService;
         }
@@ -29,17 +30,16 @@ namespace WebAPI.Controllers
         [SwaggerOperation(Summary = "Retrieves suborder with specific id")]
         public async Task<IActionResult> Get(Guid id)
         {
+            // jesli adm to wtedy sprawdź generalnie do ogaru
+            bool isUserAdmin = HttpContext.User.IsInRole("Admin");
             // pobranie nazwy użytkwnika
-            var userName = HttpContext.User.Identity.Name;
-
-
-            if (!await _suborderService.CheckPermitionAsync(id, userName))
-                return NotFound();
-            else
+                
+            if(isUserAdmin || await _suborderService.CheckPermitionAsync(id, HttpContext.User.Identity.Name))
             {
                 var suborder = await _suborderService.GetSuborderByIdAsync(id);
                 return Ok(suborder);
             }
+            return NotFound();
         }
 
         [HttpPost]

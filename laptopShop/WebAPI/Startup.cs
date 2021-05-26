@@ -39,25 +39,76 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ILaptopRepository, LaptopRepository>();
-            services.AddScoped<ILaptopService, LaptopService>();
-            services.AddScoped<IUserOrderRepository, UserOrderRepository>();
             services.AddScoped<IUserOrderService, UserOrderService>();
+            services.AddScoped<IUserOrderRepository, UserOrderRepository>();
+
+            services.AddScoped<ISuborderService, SuborderService>();
+            services.AddScoped<ISuborderRepository, SuborderRepository>();
+
+            services.AddScoped<ILaptopService, LaptopService>();
+            services.AddScoped<ILaptopRepository, LaptopRepository>();
+
+            services.AddScoped<IDeliveryService, DeliveryService>();
+            services.AddScoped<IDeliveryRepository, DeliveryRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IRepository, Repository>();
 
             // dla mappera z mapowaniem w DTO poprzez dobieranie siê do DTOsów przez refleksje
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
             // dla mappera ze standardow¹ konfiguracj¹
-            //services.AddSingleton(AutoMapperConfig.Initialize());
+            services.AddSingleton(AutoMapperConfig.Initialize());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+
+                // do autoryzacji
+                // add JWT Authentication
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "JWT Authentication",
+                    Description = "Enter JWT Bearer token **_only_**",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer", // must be lower case
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {securityScheme, new string[] { }}
+                });
+
+                // add Basic Authentication
+                var basicSecurityScheme = new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic",
+                    Reference = new OpenApiReference { Id = "BasicAuth", Type = ReferenceType.SecurityScheme }
+                };
+                c.AddSecurityDefinition(basicSecurityScheme.Reference.Id, basicSecurityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {basicSecurityScheme, new string[] { }}
+                });
+
+                // koniec autoryzacji wklejonej od marcina
+
+
+
                 c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
 
             // For Entity Framework  
-            services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection3")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataBaseContext>()
