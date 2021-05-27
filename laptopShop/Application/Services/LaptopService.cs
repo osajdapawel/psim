@@ -26,7 +26,6 @@ namespace Application.Services
         public async Task<IEnumerable<LaptopDTO>> GetAllLaptopsAsync()
         {
             var laptops = await _laptopRepository.GetAllAsync();
-
             return _mapper.Map<IEnumerable<LaptopDTO>>(laptops);
         }
 

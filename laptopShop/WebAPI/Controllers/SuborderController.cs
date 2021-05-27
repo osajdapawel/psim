@@ -30,14 +30,14 @@ namespace WebAPI.Controllers
         [SwaggerOperation(Summary = "Retrieves suborder with specific id")]
         public async Task<IActionResult> Get(Guid id)
         {
-            // jesli adm to wtedy sprawdź generalnie do ogaru
             bool isUserAdmin = HttpContext.User.IsInRole("Admin");
-            // pobranie nazwy użytkwnika
                 
+            // jeśli user jest adminem to  dalej nie sprawdzaj czy jest "właścicieliem" podzamówienia
             if(isUserAdmin || await _suborderService.CheckPermitionAsync(id, HttpContext.User.Identity.Name))
             {
                 var suborder = await _suborderService.GetSuborderByIdAsync(id);
-                return Ok(suborder);
+                if(suborder != null)
+                    return Ok(suborder);
             }
             return NotFound();
         }
@@ -52,16 +52,20 @@ namespace WebAPI.Controllers
             return Created( $"api/suborders/{suborder.Id}", suborder);
         }
 
-
         [HttpPut]
         [Authorize(Roles = "Admin, User")]
         [SwaggerOperation(Summary = "Update suborder")]
         public async Task<IActionResult> Put(UpdateSuborderDTO updateSuborderDTO)
         {
-            if (await _suborderService.UpdateSuborderAsync(updateSuborderDTO) == true)
-                return NoContent();
-            else
-                return BadRequest();
+            bool isUserAdmin = HttpContext.User.IsInRole("Admin");
+
+            // Do edycji prawo ma tylko i wyłącznie "właściciel" podzamowienia lub admin 
+            // sprawdzenie czy user jest adminem lub właścicielem
+            if (isUserAdmin || await _suborderService.CheckPermitionAsync(updateSuborderDTO.Id, HttpContext.User.Identity.Name))
+                if (await _suborderService.UpdateSuborderAsync(updateSuborderDTO) == true) 
+                    return NoContent();
+            
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
@@ -69,11 +73,17 @@ namespace WebAPI.Controllers
         [SwaggerOperation(Summary = "Delete an existing suborder")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            if (await _suborderService.DeleteSuborderAsync(id) == true)
-                return NoContent();
-            else
-                return BadRequest();
+            bool isUserAdmin = HttpContext.User.IsInRole("Admin");
+
+            if (isUserAdmin || await _suborderService.CheckPermitionAsync(id, HttpContext.User.Identity.Name))
+                if (await _suborderService.DeleteSuborderAsync(id) == true)
+                    return NoContent();
+           
+            return BadRequest();
         }
 
     }
 }
+
+// co robi celnik w terminalu
+// CLI 

@@ -37,6 +37,7 @@ namespace Application.DTO
             profile.CreateMap<Order, OrderDTO>()                   // całkowity koszt = SUMA( laptop * cena ) + cena dostawy
                 .ForMember(p => p.TotalPrice, o => o.MapFrom(src => src.Suborders.Sum(so => so.Quantity * so.Laptop.Price) + src.Delivery.Price))
                 .ForMember(p => p.DeliveryName, o => o.MapFrom( src => src.Delivery.Type));
+                
         }
     }
 }

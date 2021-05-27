@@ -6,6 +6,8 @@ odejmowanie od stanu, i jeœli user kupi ju¿ coœ takiego samego to trza zedytowaæ
 
 //laptop name zmapowaæ w suborder
 
+przy create w order dodaæ odpowiedni status enuma
+
  proc
 28e80ebf-803e-44c7-8ed2-e5a3835d03c6
 2018-06-23 07:30:20
@@ -29,5 +31,17 @@ delivery
 user 
 21780b3b-5a6b-48d1-8196-a0eafb74aadd
 
+AdminOrderController
 
+api/order/admin
+getbyUserId(guid)
+getAllOrders
+
+OrderController
+
+getbyusername()
+getbyid(Guid id)
+post()
+put 
+delete
 

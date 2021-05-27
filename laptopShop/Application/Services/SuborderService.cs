@@ -15,7 +15,6 @@ namespace Application.Services
     {
         private readonly ISuborderRepository _suborderRepository; 
         private readonly IUserRepository _userRepository; 
-
         private readonly IMapper _mapper;
 
         public SuborderService(ISuborderRepository suborderRepository, IUserRepository userRepository, IMapper mapper)
@@ -85,7 +84,7 @@ namespace Application.Services
             // tu może być potrzebny include
             var orderUserId = suborder.Order.UserId;
 
-            if (orderUserId == userId)
+            if (orderUserId.ToString() == userId)
                 return true;
             else
                 return false;

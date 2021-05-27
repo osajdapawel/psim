@@ -13,19 +13,19 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserOrderController : ControllerBase
     {
-        private readonly IUserOrderService _userOrderService;
+        private readonly IOrderService _userOrderService;
 
-        public UserOrderController(IUserOrderService userOrderService)
+        public UserOrderController(IOrderService userOrderService)
         {
             _userOrderService = userOrderService;
         }
 
-        [HttpGet]
+       /* [HttpGet]
         public async Task<IActionResult> GetOrders()
         {
             var userName = HttpContext.User.Identity.Name;
 
-            return Ok(await _userOrderService.GetAllAsync(userName));
+            return Ok(await _userOrderService.GetAllByUserNameAsync(userName));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder(Guid id)
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             var userName = HttpContext.User.Identity.Name;
 
             return Ok(await _userOrderService.GetByIdAsync(id));
-        }
+        }*/
 
     }
 }
