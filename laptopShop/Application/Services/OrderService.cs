@@ -50,7 +50,7 @@ namespace Application.Services
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<OrderDTO>> GetAllUserOrdersByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<OrderDTO>> GetAllUserOrdersByUserIdAsync(string userId)
         {
             var userOrders = await _orderRepository.GetByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<OrderDTO>>(userOrders);

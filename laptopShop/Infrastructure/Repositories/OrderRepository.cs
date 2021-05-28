@@ -42,7 +42,7 @@ namespace Infrastructure.Repositories
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<Order>> GetByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<Order>> GetByUserIdAsync(string userId)
 
             => await _dbContext.Orders.Where(p => p.UserId == userId).ToListAsync();
 

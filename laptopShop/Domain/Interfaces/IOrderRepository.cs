@@ -27,7 +27,7 @@ namespace Domain.Interfaces
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public Task<IEnumerable<Order>> GetByUserIdAsync(Guid userId);
+        public Task<IEnumerable<Order>> GetByUserIdAsync(string userId);
 
         /// <summary>
         /// Metoda asynchroniczna zwracająca zamówienia użytkownika o podanej nazwie

@@ -27,7 +27,7 @@ namespace Application.Interfaces
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public Task<IEnumerable<OrderDTO>> GetAllUserOrdersByUserIdAsync(Guid userId);
+        public Task<IEnumerable<OrderDTO>> GetAllUserOrdersByUserIdAsync(string userId);
 
         /// <summary>
         /// Metoda asynchroniczna zwracająca kolekcję zamówień użytkownika o konkretnej nazwie

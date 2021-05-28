@@ -22,8 +22,8 @@ namespace WebAPI.Controllers
             _orderService = orderService;
         }
 
-        [HttpGet]
-        [Route("all")]
+        [HttpGet("all")]
+        //[Route("all")]
         [Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "Retrieves all orders")]
         public async Task<IActionResult> Get()
@@ -32,16 +32,16 @@ namespace WebAPI.Controllers
             return Ok(orders);
         }
 
-/*        //  to nie działa, a te podwójne na dole działają
-        [HttpGet("{id}")]
-        [Route("getAll/{id}")]
+        //  to nie działa, a te podwójne na dole działają
+        [HttpGet("user/{id}")]
+        //[Route("getAll/{id}")]
         [Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "Retrieves all orders")]
-        public async Task<IActionResult> GetByUserId(Guid id)
+        public async Task<IActionResult> GetByUserId(string id)
         {
             var orders = await _orderService.GetAllUserOrdersByUserIdAsync(id);
             return Ok(orders);
-        }*/
+        }
 
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin, User")]
