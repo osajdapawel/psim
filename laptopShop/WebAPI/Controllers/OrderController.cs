@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
         [HttpGet("user/{id}")]
         //[Route("getAll/{id}")]
         [Authorize(Roles = "Admin")]
-        [SwaggerOperation(Summary = "Retrieves all orders")]
+        [SwaggerOperation(Summary = "Retrieves all orders that belongs to user with specific id")]
         public async Task<IActionResult> GetByUserId(string id)
         {
             var orders = await _orderService.GetAllUserOrdersByUserIdAsync(id);
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
 
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin, User")]
-        [SwaggerOperation(Summary = "Retrieves all orders")]
+        [SwaggerOperation(Summary = "Retrieves order with specific id")]
         public async Task<IActionResult> GetById(Guid id)
         {
             bool isUserAdmin = HttpContext.User.IsInRole("Admin");
