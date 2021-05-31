@@ -32,6 +32,30 @@ namespace WebAPI.Controllers
             return Ok(orders);
         }
 
+        // można tak zmodyfikować metodę confirm purchase aby zwróciła podzamówienia które nie mogą zostać zrealizowane, bez potwierdzania innych
+        // następnie będzie można je zmodyfikować i dopiero ponownie wywołać tę metodę w celu potwierdzenia
+        [HttpGet("buy/{id}")]
+        [Authorize(Roles = "User")]
+        [SwaggerOperation(Summary = "Confirm purchase of items in suborders related with order with specific id. Retrieves not realised suborders due to lack of laptops")]
+        public async Task<IActionResult> Buy(Guid id)
+        {
+            bool userHasPermition = await _orderService.CheckPermitionAsync(id, HttpContext.User.Identity.Name);
+
+            if (userHasPermition)
+            {
+                //wywołaj metodę
+                var notRealisedSuborders = await _orderService.ConfirmPurchaseAsync(id);
+                if (notRealisedSuborders.Count() == 0)
+                    return NoContent();
+                else
+                    return Ok(notRealisedSuborders);
+            }
+            else
+                return NotFound();
+            
+        }
+
+
         //  to nie działa, a te podwójne na dole działają
         [HttpGet("user/{id}")]
         //[Route("getAll/{id}")]

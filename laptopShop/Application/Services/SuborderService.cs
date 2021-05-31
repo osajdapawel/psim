@@ -55,7 +55,7 @@ namespace Application.Services
                 return false;
 
             var updatedSuborder = _mapper.Map(updateSuborder, suborder);
-
+            updatedSuborder.LastModified = DateTime.UtcNow;
             return await _suborderRepository.UpdateAsync(updatedSuborder);
 
         }

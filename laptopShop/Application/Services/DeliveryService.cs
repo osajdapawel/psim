@@ -53,6 +53,7 @@ namespace Application.Services
                 return false;
 
             var updatedDelivery = _mapper.Map(newDelivery, delivery);
+            updatedDelivery.LastModified = DateTime.UtcNow;
             return await _deliveryRepository.UpdateAsync(updatedDelivery);
         }
 

@@ -1,13 +1,10 @@
-userid w asp net identity ma jako user id sringa, a mo¿e userid jako stringa
-a w orderach reprezentowany jest jako guid - niepootrzebnie wprowadzilem zmianê
+jeœli user kupi ju¿ coœ takiego samego to trza zedytowaæ poprzedniego subordera dodaj¹c do niego now¹ iloœæ
 
 ppm -> git -> blame
 
-W metodach update poustawiaæ update time
-wprowadziæ porz¹dek z DTO i mapowaniem - mapowanie w DTO 
+wprowadziæ porz¹dek z DTO i mapowaniem - mapowanie w DTO - nie dzia³a do koñca poprawnie
 daty w DTOsach pododawaæ
-user nie mo¿e kupiæ wiêcej ni¿ jest na stanie
-odejmowanie od stanu, i jeœli user kupi ju¿ coœ takiego samego to trza zedytowaæ poprzedniego subordera dodaj¹c do niego now¹ iloœæ
+
 
 //laptop name zmapowaæ w suborder
 
@@ -51,3 +48,6 @@ post()
 put 
 delete
 
+done:
+user nie mo¿e kupiæ wiêcej ni¿ jest na stanie
+odejmowanie od stanu

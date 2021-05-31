@@ -64,5 +64,12 @@ namespace Application.Interfaces
         /// <param name="username">Nazwa użytkownika, którego uprawnienia są sprawdzane</param>
         /// <returns>true jeśli użytkownik ma uprawnienia,  false jeśli ich nie ma</returns>
         public Task<bool> CheckPermitionAsync(Guid id, string username);
+
+        /// <summary>
+        /// Metoda asynchroniczna potwierdzająca zakup danego zamówienia - odejmuje od liczby laptopów na stanie liczbę zakupionych lapotopów w poszczególnym subordersie
+        /// </summary>
+        /// <param name="id">Id zamówienia do potwierdzenia</param>
+        /// <returns>True - jeśli udało się potwierdzić zamówienie - jest wystarczająco laptopów na stanie, false - jeśli nie udało się potwierdzić zamówienia</returns>
+        public Task<IEnumerable<SuborderDTO>> ConfirmPurchaseAsync(Guid id);
     }
 }

@@ -15,12 +15,16 @@ namespace Application.Services
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ILaptopRepository _laptopRepository;
+        private readonly ISuborderRepository _suborderRepository;
         private readonly IMapper _mapper;
 
-        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository, IMapper mapper)
+        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository, ILaptopRepository laptopRepository, ISuborderRepository suborderRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _userRepository = userRepository;
+            _laptopRepository = laptopRepository;
+            _suborderRepository = suborderRepository;
             _mapper = mapper;
         }
 
@@ -92,6 +96,7 @@ namespace Application.Services
             if (order == null)
                 return false;
             var updatedOrder = _mapper.Map(updateOrder, order);
+            updatedOrder.LastModified = DateTime.UtcNow;
             return await _orderRepository.UpdateAsync(updatedOrder);
         }
 
@@ -125,6 +130,33 @@ namespace Application.Services
                 //return true;
            // else
                 return false;
+        }
+
+        /// <summary>
+        /// Metoda asynchroniczna potwierdzająca zakup danego zamówienia - odejmuje od liczby laptopów na stanie liczbę zakupionych lapotopów w poszczególnym subordersie
+        /// </summary>
+        /// <param name="id">Id zamówienia do potwierdzenia</param>
+        /// <returns>True - jeśli udało się potwierdzić zamówienie - jest wystarczająco laptopów na stanie, false - jeśli nie udało się potwierdzić zamówienia</returns>
+        public async Task<IEnumerable<SuborderDTO>> ConfirmPurchaseAsync(Guid id)
+        {
+            // pobranie listy laptopów należących do danego zamówienia
+            var suborders = Enumerable.ToList( await _suborderRepository.GetAllSuborderOfOrderAsync(id));
+
+            Laptop laptop;
+            List<SuborderDTO> notRealisedSubordersDTO = new List<SuborderDTO>();
+
+            foreach(var suborder in suborders)
+            {
+                laptop = await _laptopRepository.GetByIdAsync(suborder.LaptopId);                   
+                if (laptop.Quantity >= suborder.Quantity)                                           // jeśli laptopów z danego podzamówienia jest mniej na stanie
+                {
+                    laptop.Quantity -= suborder.Quantity;           // jeśli jest wystarczająco
+                    await _laptopRepository.UpdateAsync(laptop);    // odejmij od stanu i zaktualizuj
+                }                                                            
+                else
+                    notRealisedSubordersDTO.Add(_mapper.Map<SuborderDTO>(suborder));               // to dodaj je do listy niezrealizowanych 
+            }
+            return notRealisedSubordersDTO.AsEnumerable(); 
         }
     }
 }

@@ -61,6 +61,7 @@ namespace Application.Services
                 return false;
 
             var updatedLaptop = _mapper.Map(updateLaptopDTO, laptop);
+            updatedLaptop.LastModified = DateTime.UtcNow;
             return await _laptopRepository.UpdateAsync(updatedLaptop);
         }
 
